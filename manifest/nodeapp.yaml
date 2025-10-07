@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nodeapp
+spec:
+  destination:
+    name: in-cluster
+    namespace: dev
+  source:
+    path: nodeapp
+    repoURL: https://github.com/kongdev/poc-minikube
+    targetRevision: HEAD
+    helm:
+      valueFiles: []
+  sources: []
+  project: default
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
