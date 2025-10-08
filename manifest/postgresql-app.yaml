@@ -11,6 +11,10 @@ spec:
     targetRevision: 18.0.8
     helm:
       values: |
+        image:
+          repository: bitnamilegacy/postgresql
+          tag: "17.6.0"
+          pullPolicy: IfNotPresent
         auth:
           postgresPassword: ZjPLOUmLMv
         primary:
