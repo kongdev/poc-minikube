@@ -38,7 +38,39 @@ After deployment, the application will be available at:
 - Kubernetes (port-forward): http://localhost:3003
 
 
-## Create Argo Application
+## Install ArgoCD on Minikube 
+```bash
+kubectl create ns argocd &&\
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+```
+
+## ArgoCD server service to NodePort
+```bash
+kubectl patch svc argocd-server -n argocd -p '{"spec":{"type":"NodePort"}}'
+service/argocd-server patched
+```
+## ArgoCD Get password
+```bash
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d && echo
+```
+
+## Install ArgoCD on Minikube 
+```bash
+kubectl create ns argocd &&\
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+```
+
+## ArgoCD server service to NodePort
+```bash
+kubectl patch svc argocd-server -n argocd -p '{"spec":{"type":"NodePort"}}'
+```
+
+## ArgoCD Get password
+```bash
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d && echo
+```
+
+## Create Argo Application Components
 ```yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Application
