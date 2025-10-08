@@ -36,3 +36,27 @@ kubectl port-forward svc/nodeapp 3003:3000 -n argocd
 After deployment, the application will be available at:
 - Local Docker: http://localhost:3000
 - Kubernetes (port-forward): http://localhost:3003
+
+
+## Create Argo Application
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: components
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/kongdev/poc-minikube
+    path: manifest
+    targetRevision: HEAD
+    directory:
+      recurse: true
+      jsonnet: {}
+  destination:
+    name: in-cluster
+    namespace: argocd
+  syncPolicy:
+    automated: {}
+```
