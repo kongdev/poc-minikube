@@ -76,3 +76,40 @@ spec:
   syncPolicy:
     automated: {}
 ```
+
+
+
+## Adding Bitnami Helm repository
+```bash
+helm repo add bitnami https://charts.bitnami.com/bitnami
+```
+
+## Updating Helm repositories
+```bash 
+helm repo update
+```
+
+## Helm Installing PostgreSQL
+```bash
+helm install postgresql bitnami/postgresql -n argocd
+```
+
+## Helm Uninstalling PostgreSQL
+```bash
+helm uninstall postgresql -n argocd
+```
+
+## Checking if PostgreSQL pod is running 
+```bash
+kubectl get pods -n argocd | grep postgresql
+```
+
+## forward PostgreSQL port 5442
+```bash
+kubectl port-forward --namespace argocd svc/postgresql 5442:5432
+```
+
+## Getting  PostgreSQL Default password from secret
+```bash
+export POSTGRES_PASSWORD=$(kubectl get secret --namespace argocd postgresql -o jsonpath="{.data.postgres-password}" | base64 -d) && echo "Password: $POSTGRES_PASSWORD"
+```

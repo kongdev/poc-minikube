@@ -102,3 +102,12 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+# PostgreSQL configuration
+postgresql:
+  enabled: true
+  host: postgresql.argocd.svc.cluster.local
+  port: 5432
+  database: postgres
+  username: postgres
+  password: ZjPLOUmLMv
